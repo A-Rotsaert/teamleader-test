@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Router;
 
 use App\App;
-use App\Config\ConfigInterface;
+use App\Interface\ConfigInterface;
+use App\Interface\RouterInterface;
 use DI\Container;
 
 /**
@@ -31,21 +32,6 @@ final class Router implements RouterInterface
     {
         $this->routes = $config->get('routes');
         $this->container = App::getContainer();
-    }
-
-    /**
-     * Get Route
-     *
-     * Tries to match the current uri to a defined route, returns false if no route was found.
-     *
-     * @return false|array
-     */
-    private function getRouteFromUri(): false|array
-    {
-        $routesArrayValues = array_values($this->routes);
-        $routeArrayIndex = (array_search($_SERVER['REQUEST_URI'], array_column($routesArrayValues, 'uri')));
-
-        return (is_int($routeArrayIndex)) ? $routesArrayValues[$routeArrayIndex] : $routeArrayIndex;
     }
 
     /**
@@ -86,5 +72,20 @@ final class Router implements RouterInterface
         }
 
         return true;
+    }
+
+    /**
+     * Get Route
+     *
+     * Tries to match the current uri to a defined route, returns false if no route was found.
+     *
+     * @return false|array
+     */
+    private function getRouteFromUri(): false|array
+    {
+        $routesArrayValues = array_values($this->routes);
+        $routeArrayIndex = (array_search($_SERVER['REQUEST_URI'], array_column($routesArrayValues, 'uri')));
+
+        return (is_int($routeArrayIndex)) ? $routesArrayValues[$routeArrayIndex] : $routeArrayIndex;
     }
 }

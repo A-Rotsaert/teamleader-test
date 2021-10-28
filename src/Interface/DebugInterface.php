@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Router;
+namespace App\Interface;
 
 /**
- * RouterInterface
+ * DebugBacktraceInterface
  *
  * @author <andy.rotsaert@live.be>
  */
-interface RouterInterface
+interface DebugInterface
 {
-
 }

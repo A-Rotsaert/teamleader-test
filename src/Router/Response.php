@@ -37,6 +37,8 @@ final class Response
 
     /**
      * @param mixed $data
+     *
+     * @todo: fix headers already sent
      */
     private function outputAsJSON(mixed $data)
     {

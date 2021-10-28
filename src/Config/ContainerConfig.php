@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use App\Interface\ConfigInterface;
+use App\Interface\DebugInterface;
+use App\Interface\LoggerInterface;
+use App\Interface\RouterInterface;
 use App\Logger\Logger;
 use App\Router\Router;
-use App\Router\RouterInterface;
-use App\Logger\LoggerInterface;
+use App\Service\DebugService;
 use JetBrains\PhpStorm\ArrayShape;
 
 use function DI\get;
@@ -26,7 +29,8 @@ class ContainerConfig
     #[ArrayShape([
         RouterInterface::class => "\Closure",
         LoggerInterface::class => "\Closure",
-        ConfigInterface::class => "\DI\Definition\Reference"
+        DebugInterface::class => "\DI\Definition\Reference",
+        ConfigInterface::class => "\DI\Definition\Reference",
     ])]
     public static function getServices(): array
     {
@@ -43,6 +47,7 @@ class ContainerConfig
 
                 return $logger;
             },
+            DebugInterface::class => get(DebugService::class),
             ConfigInterface::class => get(YamlConfigParser::class),
         ];
     }

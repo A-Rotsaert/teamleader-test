@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App;
 
 use App\Config\ContainerConfig;
-use App\Router\RouterInterface;
+use App\Interface\DebugInterface;
+use App\Interface\RouterInterface;
 use DI\Container;
 use DI\ContainerBuilder;
 use Dotenv\Dotenv;
@@ -46,6 +47,7 @@ final class App
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions($definitions);
         self::$container = $containerBuilder->build();
+        self::$container->make(DebugInterface::class);
         self::$container->make(RouterInterface::class);
     }
 

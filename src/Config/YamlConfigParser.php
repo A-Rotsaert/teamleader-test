@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Config;
 
-use App\Logger\LoggerInterface;
-use Symfony\Component\Yaml\Yaml;
+use App\Interface\ConfigInterface;
+use App\Interface\LoggerInterface;
 use Symfony\Component\Yaml\Exception\ParseException;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * YamlConfigParser
@@ -33,7 +34,7 @@ final class YamlConfigParser implements ConfigInterface
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
-        $this->configDirectory = dirname($_SERVER['DOCUMENT_ROOT']) . $_ENV['CONFIG_PATH'];
+        $this->configDirectory = dirname($_SERVER['DOCUMENT_ROOT']).$_ENV['CONFIG_PATH'];
     }
 
     /**
@@ -47,31 +48,6 @@ final class YamlConfigParser implements ConfigInterface
         $config = $this->parseConfig($this->getConfig($type), $type);
 
         return ($configKey) ? $this->traverseConfig($config, $configKey, $type) : $config;
-    }
-
-    /**
-     * @param array $arr
-     * @param string $path
-     * @param string $type
-     *
-     * @return mixed
-     */
-    private function traverseConfig(array $arr, string $path, string $type): mixed
-    {
-        $pointer = $arr;
-        $keys = explode('.', $path);
-
-        foreach ($keys as $key) {
-            if (isset($pointer[$key])) {
-                $pointer = $pointer[$key];
-            } else {
-                $errorMessage = "Unable to find key '{$pointer}' from '{$path}' in  {$type}.yaml";
-                $this->logger->critical($errorMessage);
-                throw new \InvalidArgumentException($errorMessage);
-            }
-        }
-
-        return $pointer;
     }
 
     /**
@@ -105,5 +81,30 @@ final class YamlConfigParser implements ConfigInterface
         } else {
             throw new \InvalidArgumentException(sprintf('YamlConfigParser file "%s" does not exist', $file));
         }
+    }
+
+    /**
+     * @param array $arr
+     * @param string $path
+     * @param string $type
+     *
+     * @return mixed
+     */
+    private function traverseConfig(array $arr, string $path, string $type): mixed
+    {
+        $pointer = $arr;
+        $keys = explode('.', $path);
+
+        foreach ($keys as $key) {
+            if (isset($pointer[$key])) {
+                $pointer = $pointer[$key];
+            } else {
+                $errorMessage = "Unable to find key '{$pointer}' from '{$path}' in  {$type}.yaml";
+                $this->logger->critical($errorMessage);
+                throw new \InvalidArgumentException($errorMessage);
+            }
+        }
+
+        return $pointer;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Logger;
 
+use App\Interface\LoggerInterface;
 use Monolog\ErrorHandler;
 use Monolog\Handler\StreamHandler;
 
@@ -12,7 +13,7 @@ use Monolog\Handler\StreamHandler;
  *
  * @author <andy.rotsaert@live.be>
  */
-class Logger extends \Monolog\Logger implements LoggerInterface
+final class Logger extends \Monolog\Logger implements LoggerInterface
 {
     /**
      * @var array
@@ -32,8 +33,8 @@ class Logger extends \Monolog\Logger implements LoggerInterface
     {
         parent::__construct($key);
 
-        $this->logPath = dirname($_SERVER['DOCUMENT_ROOT']) . $_ENV['LOG_PATH'];
-        $this->pushHandler(new StreamHandler($this->logPath . "/{$key}.log", $logLevel));
+        $this->logPath = dirname($_SERVER['DOCUMENT_ROOT']).$_ENV['LOG_PATH'];
+        $this->pushHandler(new StreamHandler($this->logPath."/{$key}.log", $logLevel));
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Router\Response;
 /**
  * DefaultController
  *
+ * @todo build a better front page.
  * @author <andy.rotsaert@live.be>
  */
 final class DefaultController extends AbstractController
@@ -18,7 +19,12 @@ final class DefaultController extends AbstractController
      */
     public function index(): Response
     {
-        $this->logger->info('index loaded');
+        $this->getLogger()->info('index loaded');
+        $invalidArgument = [
+            'id' => 1,
+            'invalid' => 'invalid argument',
+        ];
+        $this->doesntwork($invalidArgument);
 
         return new Response(200, 'Index loaded OK');
     }
