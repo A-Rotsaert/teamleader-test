@@ -14,12 +14,11 @@ By the way: there may become more ways of granting customers discounts in the fu
 
 ## APIs
 
-In the [data/orders/]() directory, you can find a couple of example orders. We would like to send them to
-your service in this form. How the discounts are returned, is up to you. But make sure the reasons for the discounts are
-transparent.
+In the [data/orders/]() directory, you can find a couple of example orders. We would like to send them to your service
+in this form. How the discounts are returned, is up to you. But make sure the reasons for the discounts are transparent.
 
-In the [data]() directory, you can find source files for customer data and product data. You can assume these are
-in the format of the real external API.
+In the [data]() directory, you can find source files for customer data and product data. You can assume these are in the
+format of the real external API.
 
 ## Guidelines
 
@@ -31,4 +30,4 @@ your solution.
 
 ---
 
-_By the way, have you checked the general guidelines for our coding test? You cand find them [here](../README.md)_
+_By the way, have you checked the general guidelines for our coding test? You can't find them [here](../README.md)_
