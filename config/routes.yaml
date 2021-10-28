@@ -1,0 +1,8 @@
+api.discounts.index:
+  accepts: [ GET, POST, PUT, DELETE ]
+  uri: '/'
+  fully_qualified_name: App\Controller\DefaultController::index
+api.discounts.edit:
+  accepts: [ GET, POST, PUT, DELETE ]
+  uri: '/test'
+  fully_qualified_name: App\Controller\DefaultController::test
