@@ -11,7 +11,7 @@ allows me to get the job done.
 ## Requirements
 
 * Composer installed globally
-* PHP 8.1
+* PHP 8.0 or higher
 * Apache server with mod_rewrite enabled and AllowOverride all or ngnix equivalent
 
 ## Installation
