@@ -13,6 +13,8 @@ interface RouterInterface
 {
     /**
      * Ensure future compatibility if we decide to change the router.
+     *
+     * @return void
      */
     public function initialize(): void;
 }

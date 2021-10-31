@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "type": "previously_purchased_above_x_total_percentage",
+    "reason": "Total amount over €1000, 10% off on the whole order.",
+    "discount": {
+      "total": 1000,
+      "percentage": 10
+    },
+    "active": true
+  },
+  {
+    "id": "2",
+    "type": "buy_x_get_y_from_same_category",
+    "reason": "Buy more then 5 and get one free.",
+    "discount": {
+      "category": 2,
+      "quantity": 5,
+      "free_items": 1
+    },
+    "active": true
+  },
+  {
+    "id": "3",
+    "type": "same_category_cheapest_item_percentage",
+    "reason": "Bulk category buy deal, %d%% percent discount on the cheapest item in category %d. ",
+    "discount": {
+      "category": 1,
+      "percentage": 20
+    },
+    "active": true
+  }
+]

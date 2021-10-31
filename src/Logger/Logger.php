@@ -33,12 +33,14 @@ final class Logger extends \Monolog\Logger implements LoggerInterface
     {
         parent::__construct($key);
 
-        $this->logPath = dirname($_SERVER['DOCUMENT_ROOT']).$_ENV['LOG_PATH'];
-        $this->pushHandler(new StreamHandler($this->logPath."/{$key}.log", $logLevel));
+        $this->logPath = dirname($_SERVER['DOCUMENT_ROOT']) . $_ENV['LOG_PATH'];
+        $this->pushHandler(new StreamHandler($this->logPath . "/{$key}.log", $logLevel));
     }
 
     /**
      * Setup error and request logs.
+     *
+     * @return void
      */
     public function enableSystemLogs(): void
     {

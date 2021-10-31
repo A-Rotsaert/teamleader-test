@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use App\Discount\Locator\DiscountLocator;
 use App\Interface\ConfigInterface;
 use App\Interface\DebugInterface;
 use App\Interface\LoggerInterface;
+use App\Interface\RepositoryInterface;
 use App\Interface\RouterInterface;
 use App\Logger\Logger;
+use App\Repository\JsonRepository;
 use App\Router\Router;
 use App\Service\DebugService;
-use JetBrains\PhpStorm\ArrayShape;
 
 use function DI\get;
 
@@ -24,14 +26,10 @@ use function DI\get;
 class ContainerConfig
 {
     /**
+     * Configure container and autowire
+     *
      * @return array
      */
-    #[ArrayShape([
-        RouterInterface::class => "\Closure",
-        LoggerInterface::class => "\Closure",
-        DebugInterface::class => "\DI\Definition\Reference",
-        ConfigInterface::class => "\DI\Definition\Reference",
-    ])]
     public static function getServices(): array
     {
         return [
@@ -49,6 +47,12 @@ class ContainerConfig
             },
             DebugInterface::class => get(DebugService::class),
             ConfigInterface::class => get(YamlConfigParser::class),
+            RepositoryInterface::class => function (ConfigInterface $config) {
+                return new JsonRepository($config);
+            },
+            DiscountLocator::class => function (ConfigInterface $config, RepositoryInterface $repository) {
+                return new DiscountLocator($config, $repository);
+            }
         ];
     }
 }

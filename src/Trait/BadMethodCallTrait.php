@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Trait;
 
-use JetBrains\PhpStorm\NoReturn;
-
 /**
  * BadMethodCallTrait
  *
@@ -17,7 +15,7 @@ trait BadMethodCallTrait
      * @param string $name
      * @param array $arguments
      */
-    #[NoReturn] public function __call(string $name, array $arguments): void
+    public function __call(string $name, array $arguments): void
     {
         throw new \BadMethodCallException("Method {$name} does not exist in {$this->getClass()}.");
     }

@@ -34,7 +34,7 @@ final class YamlConfigParser implements ConfigInterface
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
-        $this->configDirectory = dirname($_SERVER['DOCUMENT_ROOT']).$_ENV['CONFIG_PATH'];
+        $this->configDirectory = dirname($_SERVER['DOCUMENT_ROOT']) . $_ENV['CONFIG_PATH'];
     }
 
     /**
@@ -99,7 +99,7 @@ final class YamlConfigParser implements ConfigInterface
             if (isset($pointer[$key])) {
                 $pointer = $pointer[$key];
             } else {
-                $errorMessage = "Unable to find key '{$pointer}' from '{$path}' in  {$type}.yaml";
+                $errorMessage = "Unable to find key '{$pointer[$key]}' from '{$path}' in  {$type}.yaml";
                 $this->logger->critical($errorMessage);
                 throw new \InvalidArgumentException($errorMessage);
             }

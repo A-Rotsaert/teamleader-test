@@ -1,0 +1,5 @@
+service_enabled: true
+types:
+  - previously_purchased_above_x_total_percentage: \App\Discount\Type\PreviouslyPurchasedTotalOrderPercentage
+  - buy_x_get_y_from_same_category: \App\Discount\Type\BuyXGetYFromSameCategory
+  - same_category_cheapest_item_percentage: \App\Discount\Type\SameCategoryCheapestItemPercentage

@@ -1,0 +1,4 @@
+data:
+  products: data/products.json
+  customers: data/customers.json
+  discounts: data/discounts.json

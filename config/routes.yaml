@@ -1,8 +1,28 @@
-api.discounts.index:
+app.default.index:
   accepts: [ GET, POST, PUT, DELETE ]
   uri: '/'
   fully_qualified_name: App\Controller\DefaultController::index
-api.discounts.edit:
+api.test.index:
   accepts: [ GET, POST, PUT, DELETE ]
   uri: '/test'
   fully_qualified_name: App\Controller\DefaultController::test
+api.order.index:
+  accepts: [ GET, POST ]
+  uri: '/order'
+  fully_qualified_name: App\Controller\OrderController::index
+docs.markdown.teamleader:
+  accepts: [ GET ]
+  uri: '/docs/teamleader.md'
+  fully_qualified_name: App\Controller\DefaultController::markdown
+docs.markdown.discounts:
+  accepts: [ GET ]
+  uri: '/docs/1-discounts.md'
+  fully_qualified_name: App\Controller\DefaultController::markdown
+docs.markdown.ordering:
+  accepts: [ GET ]
+  uri: '/docs/2-ordering.md'
+  fully_qualified_name: App\Controller\DefaultController::markdown
+docs.markdown.localdev:
+  accepts: [ GET ]
+  uri: '/docs/3-local-development.md'
+  fully_qualified_name: App\Controller\DefaultController::markdown

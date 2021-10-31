@@ -6,7 +6,6 @@ namespace App\Service;
 
 use App\Interface\ConfigInterface;
 use App\Interface\DebugInterface;
-use JetBrains\PhpStorm\ArrayShape;
 use Kint;
 use Kint\Renderer\RichRenderer;
 
@@ -17,9 +16,12 @@ use Kint\Renderer\RichRenderer;
  */
 final class DebugService implements DebugInterface
 {
+
     /**
      * Setup Kint on development (or any other) environments, unless overridden in debug.yaml
      * On production, make sure we disabled it.
+     *
+     * @param ConfigInterface $config
      */
     public function __construct(ConfigInterface $config)
     {
@@ -42,12 +44,6 @@ final class DebugService implements DebugInterface
      *
      * @return array
      */
-    #[
-        ArrayShape([
-            "enabled" => "bool",
-            "expanded" => "bool",
-            "theme" => "string",
-        ])]
     private function getConfig(ConfigInterface $config): array
     {
         return [

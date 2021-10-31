@@ -11,6 +11,7 @@ use DI\Container;
 
 /**
  * Router
+ *
  * @author <andy.rotsaert@live.be>
  */
 final class Router implements RouterInterface
@@ -45,12 +46,19 @@ final class Router implements RouterInterface
     }
 
     /**
-     * @param array $route
+     * Make sure we get a valid route that directs us to a valid controller method
+     *
+     * @param array|bool $route
      *
      * @return bool|\Exception
      */
-    private function doChecks(array $route): bool|\Exception
+    private function doChecks(array|bool $route): bool|\Exception
     {
+        if (!$route) {
+            throw new \InvalidArgumentException(
+                "Route {$_SERVER['REQUEST_URI']} does not exists."
+            );
+        }
         $explodedFullyQualifiedName = explode('::', $route['fully_qualified_name']);
 
         if (!$route = $this->getRouteFromUri()) {
@@ -76,7 +84,6 @@ final class Router implements RouterInterface
 
     /**
      * Get Route
-     *
      * Tries to match the current uri to a defined route, returns false if no route was found.
      *
      * @return false|array

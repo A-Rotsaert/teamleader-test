@@ -28,11 +28,42 @@ final class Response
     {
         $this->responseCode = $responseCode;
         switch ($outputFormat) {
+            case 'html':
+                echo $data;
+                break;
+            case 'html-md':
+                $this->processMarkdown($data);
+                break;
             default:
             case 'json':
                 $this->outputAsJSON($data);
                 break;
         }
+    }
+
+    private function processMarkdown(mixed $data): void
+    {
+        http_response_code($this->responseCode);
+        header('Content-Type: text/html ');
+        $html =
+            /** @lang HTML */
+            <<<EOD
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>Welcome</title>
+                <link rel="stylesheet" href="css/markdown.css">
+            </head>
+            <body>
+                $data
+            </body>
+            </html>
+        EOD;
+
+        echo $html;
     }
 
     /**

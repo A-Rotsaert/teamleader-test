@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Interface\ControllerInterface;
-use App\Interface\DebugInterface;
 use App\Interface\LoggerInterface;
 use App\Trait\BadMethodCallTrait;
-use JetBrains\PhpStorm\NoReturn;
 
 /**
  * AbstractController
@@ -27,14 +25,8 @@ abstract class AbstractController implements ControllerInterface
     private LoggerInterface $logger;
 
     /**
-     * @var DebugInterface
-     */
-    private DebugInterface $debugger;
-
-    /**
      * @param LoggerInterface $logger
      */
-    #[NoReturn]
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
