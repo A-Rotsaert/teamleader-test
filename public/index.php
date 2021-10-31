@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 use App\App;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-const VENDOR_PATH = __DIR__.'/../vendor';
+const ROOT_PATH = __DIR__ . '/../';
+const VENDOR_PATH = __DIR__ . '/../vendor';
+
+define("ROOT_URI", $_SERVER['REQUEST_URI']);
 
 try {
     App::createInstance();
@@ -15,7 +18,6 @@ try {
      * Setup debug backtrace on development (or any other) environments.
      * On production, just display a generic error.
      *
-     * @todo: Implement decent error page(s)
      */
     switch ($_ENV['APP_ENV']) {
         default:
@@ -25,7 +27,7 @@ try {
             d(($e->getTrace()));
             break;
         case "production":
-            echo "<h2>Something went wrong, please contact an administrator.</h2>";
-            break;
+            header('Location: /error.html', true, 301);
+            die();
     }
 }
