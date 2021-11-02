@@ -7,7 +7,7 @@ namespace App\Router;
 use App\App;
 use App\Interface\ConfigInterface;
 use App\Interface\RouterInterface;
-use DI\Container;
+use Psr\Container\ContainerInterface;
 
 /**
  * Router
@@ -22,9 +22,9 @@ final class Router implements RouterInterface
     private array $routes;
 
     /**
-     * @var Container
+     * @var ContainerInterface
      */
-    private Container $container;
+    private ContainerInterface $container;
 
     /**
      * @param ConfigInterface $config

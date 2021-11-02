@@ -7,9 +7,9 @@ namespace App;
 use App\Config\ContainerConfig;
 use App\Interface\DebugInterface;
 use App\Interface\RouterInterface;
-use DI\Container;
 use DI\ContainerBuilder;
 use Dotenv\Dotenv;
+use Psr\Container\ContainerInterface;
 
 /**
  * App
@@ -23,9 +23,9 @@ final class App
     private static ?App $instance = null;
 
     /**
-     * @var Container
+     * @var ContainerInterface
      */
-    private static Container $container;
+    private static ContainerInterface $container;
 
 
     /**
@@ -64,9 +64,9 @@ final class App
     }
 
     /**
-     * @return Container
+     * @return ContainerInterface
      */
-    public static function getContainer(): Container
+    public static function getContainer(): ContainerInterface
     {
         return self::$container;
     }
