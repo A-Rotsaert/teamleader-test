@@ -14,7 +14,7 @@ final class SameCategoryCheapestItemPercentage extends AbstractDiscountType
     /**
      * @param array $order
      * @param array $discountSettings
-     * @return mixed|void
+     * @return void
      */
     public function processOrder(array &$order, array $discountSettings)
     {
@@ -26,9 +26,9 @@ final class SameCategoryCheapestItemPercentage extends AbstractDiscountType
     /**
      * @param array $order
      * @param array $discountSettings
-     * @return array
+     * @return array|null
      */
-    private function getCheapestItemForCategory(array $order, array $discountSettings): array
+    private function getCheapestItemForCategory(array $order, array $discountSettings): ?array
     {
         $cheapestItem = null;
         foreach ($order['items'] as $item) {
